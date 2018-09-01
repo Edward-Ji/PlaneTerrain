@@ -18,7 +18,7 @@ game_display = pygame.display.set_mode((display_width, display_height))
 # game-wide constants
 tile_size = 40
 tile_width = display_width / tile_size
-tile_length = display_length / tile_size
+tile_length = display_height / tile_size
 
 
 # classes that controls display
