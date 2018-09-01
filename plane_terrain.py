@@ -77,7 +77,7 @@ class Object:
     def __init__(self):
         pass
 
-# I don't know what edward is thinking
+# display creatures and responsible for their actions
 class Creature:
     def __init__(self):
         pass
