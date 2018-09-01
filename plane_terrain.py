@@ -1,11 +1,11 @@
-# Edward
+# Plane Terrain main python file created by Edward Ji in Sep 2018.
 
 import os
 import pygame
 import random
 from sge import *
 
-#preparation
+# preparation
 os.chdir(os.path.join(os.path.abspath(os.path.curdir),u'assets'))
 
 pygame.init()
@@ -87,6 +87,7 @@ pygame.display.set_caption("Plane Terrain")
 icon_img = pygame.image.load("icon.png")
 pygame.display.set_icon(icon_img)
 
+# main functions
 def load():
     pass
 
@@ -101,3 +102,11 @@ def craft():
 
 def map():
     pass
+
+def error():
+    pass
+
+if load():
+    menu()
+else:
+    error("Error occurs while loading!")
