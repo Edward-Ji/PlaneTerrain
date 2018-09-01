@@ -77,6 +77,11 @@ class Object:
     def __init__(self):
         pass
 
+# I don't know what edward is thinking
+class Creature:
+    def __init__(self):
+        pass
+
 # display player object and responsible for actions performed
 class Player(Creature):
     def __init__(self):
