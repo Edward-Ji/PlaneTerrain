@@ -1,6 +1,9 @@
+# Edward
+
 import os
 import pygame
 import random
+from sge import *
 
 #preparation
 os.chdir(os.path.join(os.path.abspath(os.path.curdir),u'assets'))
