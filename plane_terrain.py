@@ -1,4 +1,4 @@
-# Plane Terrain main python file created by Edward Ji in Sep 2018.
+# Plane Terrain python file created by Edward Ji in Sep 2018.
 
 import os
 import pygame
