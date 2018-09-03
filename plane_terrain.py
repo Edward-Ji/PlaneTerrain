@@ -108,7 +108,7 @@ def craft():
 def map():
     pass
 
-def error():
+def error(x):
     pass
 
 if load():
