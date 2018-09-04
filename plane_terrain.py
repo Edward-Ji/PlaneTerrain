@@ -20,6 +20,11 @@ tile_size = 40
 tile_width = display_width / tile_size
 tile_length = display_height / tile_size
 
+object_grass = pygame.image.load(os.path.join('assets', 'objects', '128x128_grass.png'))
+object_stone = pygame.image.load(os.path.join('assets', 'objects', '128x128_stone.png'))
+object_coal = pygame.image.load(os.path.join('assets', 'objects', '128x128_coal.png'))
+object_copper_ore = pygame.image.load(os.path.join('assets', 'objects', '128x128_copper_ore.png'))
+object_iron_ore = pygame.image.load(os.path.join('assets', 'objects', '128x128_iron_ore.png'))
 
 # classes that controls display
 class Message:
