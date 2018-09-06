@@ -1,13 +1,13 @@
-# Plane Terrain python file created by Edward Ji in Sep 2018.
-
 import os
 import pygame
+from pygame.locals import *
 import random
-from sge import *
 
-# preparation
-os.chdir(os.path.join(os.path.abspath(os.path.curdir),u'assets'))
+# set default directory to assets
+assets_dir = os.path.join(os.path.abspath(os.path.curdir), 'assets')
+os.chdir(assets_dir)
 
+# pygame initiation
 pygame.init()
 
 display_width = 720
@@ -20,11 +20,6 @@ tile_size = 40
 tile_width = display_width / tile_size
 tile_length = display_height / tile_size
 
-object_grass = pygame.image.load(os.path.join('assets', 'objects', '128x128_grass.png'))
-object_stone = pygame.image.load(os.path.join('assets', 'objects', '128x128_stone.png'))
-object_coal = pygame.image.load(os.path.join('assets', 'objects', '128x128_coal.png'))
-object_copper_ore = pygame.image.load(os.path.join('assets', 'objects', '128x128_copper_ore.png'))
-object_iron_ore = pygame.image.load(os.path.join('assets', 'objects', '128x128_iron_ore.png'))
 
 # classes that controls display
 class Message:
@@ -78,7 +73,7 @@ class Terrain:
         pass
 
 # display an object that presents on terrain
-class Object:
+class Materials:
     def __init__(self):
         pass
 
@@ -98,8 +93,35 @@ icon_img = pygame.image.load("icon.png")
 pygame.display.set_icon(icon_img)
 
 # main functions
-def load():
-    pass
+def load(): # load game sprites, music and saved data
+    global mat_img, terrain_img, music
+
+    mat_img = {}
+    terrain_img = {}
+    music = {}
+
+    os.chdir(os.path.join(assets_dir, 'sprites'))
+    for fname in os.listdir('material'):
+        if fname[0] == '.':
+            continue
+        tag = fname.split('_')[0]
+        mat_img[tag] = pygame.image.load(os.path.join('material', fname))
+    for fname in os.listdir('terrain'):
+        if fname[0] == '.':
+            continue
+        tag = fname.split('_')[0]
+        terrain_img[tag] = pygame.image.load(os.path.join('terrain', fname))
+    os.chdir(os.path.join(assets_dir))
+    for fname in os.listdir('music'):
+        if fname[0] == '.':
+            continue
+        tag = fname.split('_')[0]
+        music[tag] = pygame.image.load(os.path.join('music', fname))
+
+    print(mat_img)
+    print(terrain_img)
+    print(music)
+
 
 def menu():
     pass
@@ -113,10 +135,15 @@ def craft():
 def map():
     pass
 
-def error(x):
+def error(error_msg):
     pass
 
-if load():
+try:
+    load()
+except:
+    error("Error occurs while loading assets!")
+
+try:
     menu()
-else:
-    error("Error occurs while loading!")
+except:
+    error("Main menu is not working!")
