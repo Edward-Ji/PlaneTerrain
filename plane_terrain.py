@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import *
 import random
 import re
-import sys
+from sys import exc_info
 
 
 # set default directory to assets
@@ -156,10 +156,9 @@ def error(error_msg):
 try:
     load()
 except Exception as e:
-    error(
-        "Encountered " + sys.exc_info()[0].__name__ + " while loading assets")
+    error("Encountered " + exc_info()[0].__name__ + " while loading assets")
 
 try:
     menu()
 except Exception as e:
-    error("Encountered " + sys.exc_info()[0].__name__ + " in main menu")
+    error("Encountered " + exc_info()[0].__name__ + " in main menu")
