@@ -156,7 +156,8 @@ def error(error_msg):
 try:
     load()
 except Exception as e:
-    error("Encountered " + sys.exc_info()[0].__name__ + " while loading assets")
+    error(
+        "Encountered " + sys.exc_info()[0].__name__ + " while loading assets")
 
 try:
     menu()
