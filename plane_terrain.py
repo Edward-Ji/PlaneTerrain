@@ -2,6 +2,7 @@ import os
 import pygame
 from pygame.locals import *
 import random
+import re
 
 # set default directory to assets
 assets_dir = os.path.join(os.path.abspath(os.path.curdir), 'assets')
@@ -104,18 +105,18 @@ def load(): # load game sprites, music and saved data
     for fname in os.listdir('material'):
         if fname[0] == '.':
             continue
-        tag = fname.split('_')[0]
+        tag = re.split(r'[_|.]',fname)[0]
         mat_img[tag] = pygame.image.load(os.path.join('material', fname))
     for fname in os.listdir('terrain'):
         if fname[0] == '.':
             continue
-        tag = fname.split('_')[0]
+        tag = re.split(r'[_|.]',fname)[0]
         terrain_img[tag] = pygame.image.load(os.path.join('terrain', fname))
     os.chdir(os.path.join(assets_dir))
     for fname in os.listdir('music'):
         if fname[0] == '.':
             continue
-        tag = fname.split('_')[0]
+        tag = re.split(r'[_|.]',fname)[0]
         music[tag] = pygame.image.load(os.path.join('music', fname))
 
     print(mat_img)
