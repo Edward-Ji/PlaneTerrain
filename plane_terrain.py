@@ -44,6 +44,8 @@ class Message:
         self.x -= 10
 
 # control the display and functionality of buttons
+
+
 class Button:
     family = []
 
@@ -68,24 +70,33 @@ class Button:
         self.x -= 10
 
 # display the terrain of game
+
+
 class Terrain:
     def __init__(self):
         pass
 
 # display an object that presents on terrain
+
+
 class Materials:
     def __init__(self):
         pass
 
 # display creatures and responsible for their actions
+
+
 class Creature:
     def __init__(self):
         pass
 
 # display player object and responsible for actions performed
+
+
 class Player(Creature):
     def __init__(self):
         pass
+
 
 # set display
 pygame.display.set_caption("Plane Terrain")
@@ -93,7 +104,9 @@ icon_img = pygame.image.load("icon.png")
 pygame.display.set_icon(icon_img)
 
 # main functions
-def load(): # load game sprites, music and saved data
+
+
+def load():  # load game sprites, music and saved data
     global mat_img, terrain_img, music
 
     mat_img = {}
@@ -126,17 +139,22 @@ def load(): # load game sprites, music and saved data
 def menu():
     pass
 
+
 def main():
     pass
+
 
 def craft():
     pass
 
+
 def map():
     pass
 
+
 def error(error_msg):
     pass
+
 
 try:
     load()
