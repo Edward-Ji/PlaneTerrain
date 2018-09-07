@@ -4,6 +4,7 @@ from pygame.locals import *
 import random
 import re
 from sys import exc_info
+import time
 
 
 # set default directory to assets
@@ -13,32 +14,41 @@ os.chdir(assets_dir)
 # pygame initiation
 pygame.init()
 
-display_width = 720
-display_height = 1000
+display_width = 1000
+display_height = 720
 
 game_display = pygame.display.set_mode((display_width, display_height))
 
-# game-wide constants
+# game-time constants
 tile_size = 40
 tile_width = display_width / tile_size
 tile_length = display_height / tile_size
+
+# colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
 
 
 # classes that controls display
 class Message:
     def __init__(self):
         self.reset()
-        self.font = pygame.font.Font("RepriseScriptStd.otf", 20)
+        self.font_small = pygame.font.Font("RepriseScriptStd.otf", 20)
+        self.font_big = pygame.font.Font("RepriseScriptStd.otf", 50)
+
+    def title(self, string):
+        bitmap = self.font_big.render(string, True, BLACK)
+        game_display.blit(bitmap, (self.x, self.y))
+        self.y += bitmap.get_rect().height
 
     def put(self, string):
-        bitmap = self.font.render(string, True, BLACK)
+        bitmap = self.font_small.render(string, True, BLACK)
         game_display.blit(bitmap, (self.x, self.y))
-        self.y += self.line_height
+        self.y += bitmap.get_rect().height
 
     def reset(self):
         self.x = 10
         self.y = 10
-        self.line_height = 15
 
     def indent(self):
         self.x += 10
@@ -63,13 +73,7 @@ class Button:
         self.button_width = 80
         self.button_height = 15
         self.x = 10
-        self.y = display_width - button_width
-
-    def indent(self):
-        self.x += 10
-
-    def unindent(self):
-        self.x -= 10
+        self.y = display_width - self.button_width
 
 
 # display the terrain of game
@@ -110,23 +114,46 @@ def load():  # load game sprites, music and saved data
     terrain_img = {}
     music = {}
 
+    game_display.fill(WHITE)
+    message = Message()
+    button = Button()
+    message.title("Loading...")
+    pygame.display.flip()
+
     os.chdir(os.path.join(assets_dir, 'sprites'))
     for fname in os.listdir('material'):
         if fname[0] == '.':
             continue
         tag = re.split(r'[_|.]', fname)[0]
         mat_img[tag] = pygame.image.load(os.path.join('material', fname))
+    message.put("material sprites loaded")
+    pygame.display.flip()
+
     for fname in os.listdir('terrain'):
         if fname[0] == '.':
             continue
         tag = re.split(r'[_|.]', fname)[0]
         terrain_img[tag] = pygame.image.load(os.path.join('terrain', fname))
+    message.put("terrain sprites loaded")
+    pygame.display.flip()
+
     os.chdir(os.path.join(assets_dir))
     for fname in os.listdir('music'):
         if fname[0] == '.':
             continue
         tag = re.split(r'[_|.]', fname)[0]
         music[tag] = pygame.image.load(os.path.join('music', fname))
+    message.put("music files loaded")
+    pygame.display.flip()
+
+    message.put("all assets loaded")
+    button.put("Start")
+    pygame.display.flip()
+
+    while True:
+        for event in pygame.event.get():
+            if event == QUIT:
+                quit()
 
     print(mat_img)
     print(terrain_img)
@@ -149,14 +176,18 @@ def map():
     pass
 
 
+def quit():
+    pass
+
+
 def error(error_msg):
     print(error_msg)
 
 
-try:
-    load()
-except Exception as e:
-    error("Encountered " + exc_info()[0].__name__ + " while loading assets")
+# try:
+load()
+# except Exception as e:
+#     error("Encountered " + exc_info()[0].__name__ + " while loading assets")
 
 try:
     menu()
