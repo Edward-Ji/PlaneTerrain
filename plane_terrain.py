@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import *
 import random
 import re
-from sys import exc_info
+import sys
 import time
 
 
@@ -63,9 +63,10 @@ class Button:
 
     def __init__(self):
         self.reset()
+        self.font = pygame.font.Font("RepriseScriptStd.otf", 50) # tempory solution
 
     def put(self, text):
-        bitmap = self.font.render(string, True, BLACK)
+        bitmap = self.font.render(text, True, BLACK)
         game_display.blit(bitmap, (self.x, self.y))
         self.y += self.button_height
 
@@ -150,15 +151,16 @@ def load():  # load game sprites, music and saved data
     button.put("Start")
     pygame.display.flip()
 
-    while True:
-        for event in pygame.event.get():
-            if event == QUIT:
-                quit()
-
     print(mat_img)
     print(terrain_img)
     print(music)
 
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                sys.exit()
+                
 
 def menu():
     pass
@@ -176,10 +178,6 @@ def map():
     pass
 
 
-def quit():
-    pass
-
-
 def error(error_msg):
     print(error_msg)
 
@@ -187,9 +185,9 @@ def error(error_msg):
 # try:
 load()
 # except Exception as e:
-#     error("Encountered " + exc_info()[0].__name__ + " while loading assets")
+#     error("Encountered " + sys.exc_info()[0].__name__ + " while loading assets")
 
 try:
     menu()
 except Exception as e:
-    error("Encountered " + exc_info()[0].__name__ + " in main menu")
+    error("Encountered " + sys.exc_info()[0].__name__ + " in main menu")
