@@ -142,7 +142,7 @@ def load():  # load game sprites, music and saved data
         if fname[0] == '.':
             continue
         tag = re.split(r'[_|.]', fname)[0]
-        music[tag] = pygame.image.load(os.path.join('music', fname))
+        music[tag] = pygame.image.load(os.path.join('music', fname)) # EDWARD MUSIC IS NOT AN IMAGE
     message.put("music files loaded")
     pygame.display.flip()
 
