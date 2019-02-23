@@ -6,7 +6,6 @@ import re
 import sys
 import time
 
-
 # set default directory to assets
 assets_dir = os.path.join(os.path.abspath(os.path.curdir), 'assets')
 os.chdir(assets_dir)
@@ -160,7 +159,7 @@ def load():  # load game sprites, music and saved data
         for event in pygame.event.get():
             if event.type == QUIT:
                 sys.exit()
-                
+
 
 def menu():
     pass
